@@ -34,7 +34,7 @@
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
-    margin-bottom: 200px;
+    margin-bottom: 100px;
     font-size: 20px;
 }
  
@@ -44,4 +44,12 @@
     -webkit-animation: scroll 15s infinite linear;
     -moz-animation: scroll 15s infinite linear;
     animation: scroll 15s infinite linear;
+}
+
+.header {
+    text-align: center;
+}
+
+.headerLogo {
+    width: 60px;
 }

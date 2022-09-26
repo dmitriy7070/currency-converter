@@ -22,6 +22,7 @@ const App = () => {
       })
   }, []);
 
+
   const onChangeFirstPrice = (value) => {
     const price = value / ratesRef.current[firstCurrency];
     const result = price * ratesRef.current[twoCurrency];
@@ -43,9 +44,10 @@ const App = () => {
     onChangeTwoPrice(twoPrice)
   }, [twoCurrency])
 
+
   return (
     <div>
-    <Ticker />
+    <Ticker  ratesRef={ratesRef}/>
     <div className="Main">
       <BlockCurrency value={firstPrice} currency={firstCurrency} onChangeValue={onChangeFirstPrice} onChangeCurrency={setFirstCurrency} />
       <BlockCurrency value={twoPrice} currency={twoCurrency} onChangeValue={onChangeTwoPrice} onChangeCurrency={setTwoCurrency} />
