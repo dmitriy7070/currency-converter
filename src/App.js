@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './index.css';
 import BlockCurrency from './components/BlockCurrency/BlockCurrency';
+import Ticker from './components/Ticker/Ticker';
 
 
 const App = () => {
@@ -17,35 +18,38 @@ const App = () => {
       .then((response) => response.json())
       .then((json) => {
         ratesRef.current = json.rates;
-        onChangeOutPrice(1);
+        onChangeTwoPrice(1);
       })
   }, []);
 
-  const onChangeInPrice = (value) => {
+  const onChangeFirstPrice = (value) => {
     const price = value / ratesRef.current[firstCurrency];
     const result = price * ratesRef.current[twoCurrency];
     setTwoPrice(result.toFixed(2));
     setFirstPrice(value);
   }
 
-  const onChangeOutPrice = (value) => {
+  const onChangeTwoPrice = (value) => {
     const result = (ratesRef.current[firstCurrency] / ratesRef.current[twoCurrency]) * value;
     setFirstPrice(result.toFixed(2));
     setTwoPrice(value);
   }
 
   useEffect(() => {
-    onChangeInPrice(firstPrice)
+    onChangeFirstPrice(firstPrice)
   }, [firstCurrency])
 
   useEffect(() => {
-    onChangeOutPrice(twoPrice)
+    onChangeTwoPrice(twoPrice)
   }, [twoCurrency])
 
   return (
+    <div>
+    <Ticker />
     <div className="Main">
-      <BlockCurrency value={firstPrice} currency={firstCurrency} onChangeValue={onChangeInPrice} onChangeCurrency={setFirstCurrency} />
-      <BlockCurrency value={twoPrice} currency={twoCurrency} onChangeValue={onChangeOutPrice} onChangeCurrency={setTwoCurrency} />
+      <BlockCurrency value={firstPrice} currency={firstCurrency} onChangeValue={onChangeFirstPrice} onChangeCurrency={setFirstCurrency} />
+      <BlockCurrency value={twoPrice} currency={twoCurrency} onChangeValue={onChangeTwoPrice} onChangeCurrency={setTwoCurrency} />
+    </div>
     </div>
   )
 }
